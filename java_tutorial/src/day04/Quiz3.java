@@ -9,13 +9,16 @@ public class Quiz3 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int 단;
+		int 단 = 1;
 		
 		System.out.println("단 : ");
-		단 = sc.next();
+		단 = sc.nextInt();
 		
 		for (int i = 1; i < 10; i++) {
 			for (int j = 2; j < 10; j++) {
+				if( !(j == 단) ) {
+					continue;
+				}
 				System.out.print( j + "x" + i + "=" + i*j + "\t" );
 			}
 			System.out.println();
