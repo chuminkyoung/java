@@ -23,7 +23,7 @@ public class While3 {
 		}
 		
 		num = 10;
-		while(num > 11) {
+		while(num >= 1) {
 			// 10 ~ 1
 			System.out.println(num);
 			num--;
