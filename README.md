@@ -24,7 +24,7 @@ git config --global user.email chuu_u94@naver.com
 
 4. 앞서 생성한 저장소를 가져오기 위해 
 
-git clone colone http://github.com/[내 이름]/[저장소 명].git
+git clone colone http://github.com/chuminkyoung/[저장소 명].git
 
  
 
