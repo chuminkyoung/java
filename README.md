@@ -14,7 +14,7 @@
 
 git config --global user.name chuminkyoung
 
-git config --global user.email chuu_u94@naver.com
+git config --global user.email [메일입력]
 
  
 
