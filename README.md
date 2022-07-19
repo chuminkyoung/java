@@ -1,4 +1,3 @@
-<p>
 1. git hub에서 올릴 파일 먼저 생성
 
  
@@ -78,4 +77,3 @@ git commit -m "메모"
 git push origin master(main)
 
 을 입력해줘서 저장 완료!
-</p>
