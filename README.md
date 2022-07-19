@@ -1,4 +1,4 @@
-1. git hub에서 올릴 파일 먼저 생성
+<p style="font-weight: bold">1. git hub에서 올릴 파일 먼저 생성</p>
 
  
 
