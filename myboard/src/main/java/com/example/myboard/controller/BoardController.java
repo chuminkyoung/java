@@ -22,3 +22,6 @@ public class BoardController {
 		return "index";		// index.html 		로 이동
 	}
 }
+
+
+//  사용

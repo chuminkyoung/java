@@ -5,5 +5,8 @@ import java.util.List;
 import com.example.myboard.model.User;
 
 public interface UserService {
-	List<User> getAllUser();
+	List<User> getAllUser();			// {} 없음
 }
+
+
+// 만듦
