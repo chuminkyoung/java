@@ -16,16 +16,18 @@
 				<!-- input을 하기 위해서 form을 만들어야함 -->
 				<form th:action="@{/{id}/ (id=${user.id})}" th:object="${user}" method="POST">
 					<div class="form-group">
-						<label>이름</label>
-						<input type="text" name="first_name" th:field="*{first_name}">
+						<label style="margin-bottom: 8px; display: block;">이름</label>
+						<input type="text" name="first_name" th:field="*{first_name}" class="form-control">
 						<br>
-						<label>성</label>
-						<input type="text" name="last_name" th:field="*{last_name}">
+						<label style="margin-bottom: 8px; display: block;">성</label>
+						<input type="text" name="last_name" th:field="*{last_name}" class="form-control">
 						<br>
-						<label>이메일</label>
-						<input type="text" name="email" th:field="*{email}">
+						<label style="margin-bottom: 8px; display: block;">이메일</label>
+						<input type="text" name="email" th:field="*{email}" class="form-control">
 						
-						<div class="box-footer">
+						<br><br>
+						<div class="box-footer" style="display: flex; justify-content: center;">
+							<a class="btn btn-secondary" th:href="@{/}" style="margin-right: 10px">목록으로</a>
 							<button type="submit" class="btn btn-primary">수정하기</button>
 						</div>
 					</div>

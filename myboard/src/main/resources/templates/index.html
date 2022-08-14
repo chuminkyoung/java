@@ -70,6 +70,9 @@
 	  </button>
 	</div>
 	
+	<div class="col-sm-2">
+		총 갯수 : [[${totalItems}]]
+	</div>
 	<table class="table">
 		<tr>
 			<th scope="col">이름</th>
@@ -83,11 +86,39 @@
 			<td th:text="${use.email}"></td>
 			<td>
 				<a class="btn btn-warning" th:href="@{edit/{id}(id=${use.id})}">수정하기</a>
-				<a class="btn btn-danger">삭제하기</a>
+				<a class="btn btn-danger" th:href="@{/{id}(id=${use.id})}">삭제하기</a>
 			</td>
 		</tr>
 	</table>
-	<button class="btn btn-success">등록하기</button>
+	<a th:href="@{/new}" class="btn btn-success">등록하기</a>
+	
+	<!-- th:if, c:if 는 컨트롤러에서 넘긴 totalPages가 1보다 커야지만 보여지도록 할 수 있다. -->
+	<div th:if="${totalPages > 1}">
+		<div class="row col-sm-10">
+			<div class="col-sm-1">
+				<a th:if="${currentPage > 1}" th:href="@{'/page/' + 1}">〈〈</a>
+				<span th:unless="${currentPage > 1}">〈〈</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage -1}}">〈</a> <!-- 현재 페이지에서 -1 -->
+				<span th:unless="${currentPage > 1}">〈</span>
+			</div>
+			<div class="col-sm-2">
+				<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a> <!-- 만약 현재 페이지랑 위치가 다르면 이동시켜줄 페이지 -->
+					<span th:unless="${currentPage != i}">[[${i}]]</span>
+				</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage +1}}">〉</a>
+				<span th:unless="${currentPage < totalPages}">〉</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">〉〉</a>
+				<span th:unless="${currentPage < totalPages}">〉〉</span>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

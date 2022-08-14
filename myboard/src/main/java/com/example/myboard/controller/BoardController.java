@@ -1,5 +1,8 @@
 package com.example.myboard.controller;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +25,15 @@ public class BoardController {
 
 	@GetMapping("/")			// localhost:8080/	로 이동하면 실행하는 함수
 	public String boardPage(Model model) {
-		model.addAttribute("user", userService.getAllUser());
-		return "index";			// index.html 		로 이동
+//		model.addAttribute("user", userService.getAllUser());
+//		return "index";			// index.html 로 이동
+		return findPaginated(1, model);
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String editPage(Model model, @PathVariable Long id) {
 		model.addAttribute("user", userService.getUserById(id));
-		return "edit";			// edit.html   		로 이동
+		return "edit";			// edit.html 로 이동
 	}
 	
 	@PostMapping("/")
@@ -57,6 +61,45 @@ public class BoardController {
 		userService.updateUser(dbUser);
 		return "redirect:/";		// localhost:8080/ 로 돌아감
 	}
+	
+	
+	
+	// new.html 로 이동
+	@GetMapping("/new") 			// localhost:new/ 로 이동하면
+	public String registerUser(Model model) {
+		// Model model : html에 java값을 전달할 수 있는 객체(변수)
+		User user = new User();
+		model.addAttribute("user", user); 		// 변수명 "user", 전달값 user -> html로 전달
+		return "new"; 	// new.html을 열어라
+	}
+	
+	
+	// 삭제
+	@GetMapping("/{id}") // java랑 html이랑 통신을 하기위해 필요
+	public String deleteUser(@PathVariable Long id) {
+		userService.deleteUserById(id); 		// userService 안에있는 deleteUserById 를 통해 id를 지움
+		return "redirect:/";
+	}
+	
+	
+	// 페이지 나누기
+	@GetMapping("/page/{pageNo}")
+	public String findPaginated(@PathVariable (value="pageNo") int pageNo, Model model) {
+		// @GetMapping : html의 href와 연결
+		// @PathVariable : html의 URL에서 전달한 값을 받음
+		int pageSize = 5; 	// 한 페이지에 보여주고 싶은 갯수를 숫자로 입력
+		Page<User> page = userService.findPaginated(pageNo, pageSize);
+		List<User> listUsers = page.getContent();
+		
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages",  page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("user", listUsers);
+		
+		return "index"; 		// index.html 실행
+	}
+	
+	
 }
 
 
